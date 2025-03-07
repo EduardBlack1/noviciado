@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Habitaciones</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Noviciado</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Propiedades</a></li>
+                    <li class="nav-item"><a class="nav-link" href="habitaciones.html">Habitaciones</a></li>
+                    <li class="nav-item"><a class="nav-link" href="huespedes.html">Huéspedes</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1>Lista de Habitaciones</h1>
+        <!-- Buscador -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <input type="text" id="search-input" class="form-control" placeholder="Buscar habitación...">
+            </div>
+            <div class="col-md-6 text-end">
+                <a href="agregar-habitacion.html" class="btn btn-success">Agregar Nueva Habitación</a>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Habitación</th>
+                    <th>Propiedad</th>
+                    <th>Huéspedes</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="room-list"></tbody>
+        </table>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="js/supabaseClient.js"></script>
+    <script src="js/lista-habitaciones.js"></script>
+
+</body>
+</html>

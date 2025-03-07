@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignar Huéspedes a Habitación</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Noviciado</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Propiedades</a></li>
+                    <li class="nav-item"><a class="nav-link" href="habitaciones.html">Habitaciones</a></li>
+                    <li class="nav-item"><a class="nav-link" href="huespedes.html">Huéspedes</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Formulario de asignación de huésped a habitación -->
+    <div class="container mt-4">
+
+        <div class="container">
+            <h1>Habitación #<span id="habitacion-numero"></span></h1>
+            <div class="row">
+
+                <div class="col">
+                    <!-- Información de la habitación -->
+                    <div id="habitacion-info" class="mb-4">
+                        <p>Piso: <span id="habitacion-piso"></span></p>
+                        <p>Camas: <span id="habitacion-camas"></span></p>
+                        <p>Baño Privado: <span id="habitacion-bano"></span></p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editRoomModal">Editar Habitación</button>
+                    </div>
+                </div>
+                <div class="col">
+                    <!-- Estado de limpieza -->
+                    <div class="mb-3">
+                        <label for="estado-limpieza" class="form-label">Estado de Limpieza</label>
+                        <select id="estado-limpieza" class="form-select">
+                            <option value="limpia">Limpia</option>
+                            <option value="sucia">Sucia</option>
+                            <option value="en limpieza">En Limpieza</option>
+                        </select>
+                        <button id="guardar-estado-limpieza" class="btn btn-outline-info btn-sm">Actualizar</button>
+                    </div>
+
+                    <!-- Estado de las sábanas -->
+                    <div class="mb-3">
+                        <label for="estado-sabanas" class="form-label">Estado de las Sábanas</label>
+                        <select id="estado-sabanas" class="form-select">
+                            <option value="limpias">Limpias</option>
+                            <option value="sucias">Sucias</option>
+                        </select>
+                        <button id="guardar-estado-sabanas" class="btn btn-outline-info btn-sm">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Lista de huéspedes asignados -->
+                <h4>Huéspedes Asignados:</h4>
+                <ul id="huespedes-list" class="list-group mb-4"></ul>
+
+                <!-- Formulario para asignar nuevo huésped -->
+                <h4>Asignar Nuevo Huésped</h4>
+                <form id="assign-guest-form">
+                    <div class="mb-3">
+                        <label for="huesped" class="form-label">Selecciona un huésped</label>
+                        <select class="form-control" id="huesped" required>
+                            <option value="">Selecciona un huésped</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-sm">Asignar Huésped</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+
+         <!-- Modal para editar habitación -->
+        <div class="modal fade" id="editRoomModal" tabindex="-1" aria-labelledby="editRoomModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editRoomModalLabel">Editar Información de la Habitación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="edit-room-form">
+                            <div class="mb-3">
+                                <label for="numero" class="form-label">Número de Habitación</label>
+                                <input type="text" class="form-control" id="numero" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="piso" class="form-label">Piso</label>
+                                <input type="number" class="form-control" id="piso" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="camas" class="form-label">Número de Camas</label>
+                                <input type="number" class="form-control" id="camas" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="baño_privado" class="form-label">¿Baño Privado?</label>
+                                <input type="checkbox" class="form-check-input" id="baño_privado">
+                            </div>
+                            <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="js/supabaseClient.js"></script>
+    <script src="js/asignar-huesped.js"></script>
+
+</body>
+</html>
