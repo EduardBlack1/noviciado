@@ -73,11 +73,27 @@
                 <!-- Formulario para asignar nuevo huésped -->
                 <h4>Asignar Nuevo Huésped</h4>
                 <form id="assign-guest-form">
-                    <div class="mb-3">
-                        <label for="huesped" class="form-label">Selecciona un huésped</label>
-                        <select class="form-control" id="huesped" required>
-                            <option value="">Selecciona un huésped</option>
-                        </select>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="huesped" class="form-label">Selecciona un huésped</label>
+                                <select class="form-control" id="huesped" required>
+                                    <option value="">Selecciona un huésped</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="fecha-entrada" class="form-label">Fecha de Entrada</label>
+                                <input type="date" class="form-control" id="fecha-entrada" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="fecha-salida" class="form-label">Fecha de Salida</label>
+                                <input type="date" class="form-control" id="fecha-salida" required>
+                            </div>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-success btn-sm">Asignar Huésped</button>
                 </form>

@@ -76,7 +76,7 @@ guardarEstadoSabanasBtn.addEventListener('click', async () => {
 async function cargarHuespedesAsignados() {
     const { data: reservas, error } = await supabaseClient
         .from('reservas')
-        .select('huesped_id')
+        .select('huesped_id, fecha_inicio, fecha_fin')
         .eq('habitacion_id', habitacionId)
         .eq('estado', 'activa');
 
@@ -105,10 +105,17 @@ async function cargarHuespedesAsignados() {
     if (huespedesAsignados.length === 0) {
         huespedesList.innerHTML = '<p>No hay huéspedes asignados a esta habitación.</p>';
     } else {
-        huespedesAsignados.forEach(huesped => {
+        reservas.forEach(reserva => {
+            const huesped = huespedes.find(h => h.id === reserva.huesped_id);
+            if (!huesped) return;
+
             const li = document.createElement('li');
             li.classList.add('list-group-item');
-            li.textContent = huesped.nombre;
+            li.innerHTML = `
+                <strong>${huesped.nombre} ${huesped.apellido}</strong><br>
+                <small><strong>Entrada:</strong> ${reserva.fecha_inicio}</small> - 
+                <small><strong>Salida:</strong> ${reserva.fecha_fin}</small>
+            `;
 
             // Botón para quitar huésped
             const removeButton = document.createElement('button');
@@ -168,8 +175,16 @@ async function asignarHuesped(event) {
     event.preventDefault();
 
     const huespedId = document.getElementById('huesped').value;
-    if (!huespedId) {
-        alert('Por favor selecciona un huésped');
+    const fechaEntrada = document.getElementById('fecha-entrada').value;
+    const fechaSalida = document.getElementById('fecha-salida').value;
+
+    if (!huespedId || !fechaEntrada || !fechaSalida) {
+        alert('Por favor completa todos los campos.');
+        return;
+    }
+
+    if (fechaSalida <= fechaEntrada) {
+        alert('La fecha de salida debe ser posterior a la fecha de entrada.');
         return;
     }
 
@@ -179,16 +194,19 @@ async function asignarHuesped(event) {
             {
                 habitacion_id: habitacionId,
                 huesped_id: huespedId,
+                fecha_inicio: fechaEntrada,
+                fecha_fin: fechaSalida,
                 estado: 'activa',
             }
         ]);
 
     if (error) {
         console.error('Error al asignar huésped:', error);
+        alert('Hubo un error al asignar el huésped.');
         return;
     }
 
-    alert('Huésped asignado correctamente');
+    alert('Huésped asignado correctamente.');
     location.reload(); // Recargar la página para mostrar los cambios
 }
 
